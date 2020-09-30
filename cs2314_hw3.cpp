@@ -35,16 +35,57 @@ void mergeSort(vector<int> &vect){
     vector<int> leftVec = subVectorMaker(vect, 0, mid);
     vector<int> rightVec = subVectorMaker(vect, mid, vect.size());
 
+    cout << endl;
+
+    for(int i = 0; i < leftVec.size(); ++i){
+        cout << leftVec.at(i) << " ";
+    }
+
+    cout << endl;
+
+    for(int i = 0; i < rightVec.size(); ++i){
+        cout << rightVec.at(i) << " ";
+    }
+
+    cout << endl;
+
     selectionSort(leftVec);
     selectionSort(rightVec);
+
+    for(int i = 0; i < leftVec.size(); ++i){
+        cout << leftVec.at(i) << " ";
+    }
+
+    cout << endl;
+
+    for(int i = 0; i < rightVec.size(); ++i){
+        cout << rightVec.at(i) << " ";
+    }
+
+    cout << endl;
 
     int leftTracker = 0;
     int rightTracker = 0;
 
     for(int i = 0; i < vect.size(); ++i){
-        
-    }
+        if(leftTracker >= leftVec.size()){
+            vect.at(i) = rightVec.at(rightTracker);
+            rightTracker += 1;
+        }
+        else if (rightTracker >= rightVec.size()){
+            vect.at(i) = leftVec.at(leftTracker);
+            leftTracker += 1;
+        }
 
+        else if(leftVec.at(leftTracker) > rightVec.at(rightTracker)){
+            vect.at(i) = leftVec.at(leftTracker);
+            leftTracker += 1;
+        }
+        else{
+            vect.at(i) = rightVec.at(rightTracker);
+            rightTracker += 1;
+        }
+    }
 }
 
 void bubbleSort(vector<int> &vect){
@@ -92,21 +133,13 @@ int main(){
         cout << list.at(i) << " ";
     }
 
-    cout << endl;
-
-    selectionSort(list);
+    mergeSort(list);
 
     for(int i = 0; i < list.size(); ++i){
         cout << list.at(i) << " ";
     }
 
     cout << endl;
-
-    vector<int> sublist = subVectorMaker(list, 0, 4);
-
-    for(int i = 0; i < sublist.size(); ++i){
-        cout << sublist.at(i) << " ";
-    }
 
     return 0;
    
