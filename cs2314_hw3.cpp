@@ -3,6 +3,13 @@
 
 using namespace std;
 
+void printVector(vector<int> &vect){
+    for (int i = 0; i < vect.size(); ++i){
+        cout << vect.at(i) << " ";
+    }
+    cout << endl;
+}
+
 //takes two elements in a vector and swaps their positions
 void swap(vector<int> &vect, int idx1, int idx2){
     //stores first element in temp variable
@@ -13,7 +20,7 @@ void swap(vector<int> &vect, int idx1, int idx2){
     vect.at(idx2) = temp;
 }
 
-//implementation of selection sort that sorts elements in vector in ascending order
+//implementation of stable selection sort that sorts elements in vector in ascending order
 void selectionSort(vector<int> &vect){
     //iterates through all elements
     for(int i = 0; i < vect.size(); ++i){
@@ -27,8 +34,10 @@ void selectionSort(vector<int> &vect){
                 maxIdx = j;
             }
         }
-        //swap the positions of the elements at maxIdx and i
-        swap(vect, maxIdx, i);
+        //moves largest element to the head of the unsorted list, shifting all other elements up 1 index
+        for(int k = maxIdx; k > i; --k){
+            swap(vect, k, k-1);
+        }
     }
 }
 
@@ -150,9 +159,7 @@ int main(){
     }
 
     //print out sorted list
-    for(int i = 0; i < list.size(); ++i){
-        cout << list.at(i) << " ";
-    }
+    printVector(list);
 
     return 0;
    
